@@ -17,10 +17,15 @@ class Criterion(BaseModel):
     points: int
 
 
+class CourseAssignment(BaseModel):
+    difficulty: Difficulty
+    topic: str | None = None
+
+
 class Item(BaseModel):
     id: str = Field(default_factory=lambda: uuid.uuid4().hex[:8])
     body: str
     points: int
-    courses: dict[str, Difficulty] = Field(default_factory=dict)
+    courses: dict[str, CourseAssignment] = Field(default_factory=dict)
     criteria: list[Criterion] = Field(default_factory=list)
     solution: str | None = None
